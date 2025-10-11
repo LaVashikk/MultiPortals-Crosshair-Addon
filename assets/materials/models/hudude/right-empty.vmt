@@ -1,0 +1,12 @@
+unlitgeneric
+{
+    $baseTexture "models/hudude/right-empty"
+    $translucent 1
+    $nocull 1
+    $model 1
+    $basetexturetransform "center .5 .5 scale 1.4371257485 1.4371257485 rotate 0 translate -0.075 -0.16"
+    Proxies
+    {
+        "MaterialModify" {}
+    }
+}
