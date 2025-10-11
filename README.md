@@ -15,6 +15,11 @@ This addon provides a fully custom VScript-powered crosshair designed to integra
 - **Flexible Control:** Manage the crosshair's state (on/off, show only one portal) using standard I/O entity triggers.
 - **Ready-to-Use:** No VScript coding is required on your part.
 
+https://github.com/user-attachments/assets/867f7e4a-3ff7-42e2-8ab1-e7958141dcd7
+<div align="center">
+  Video demonstration
+</div>
+
 ## Installation
 
 1.  **Download the latest release** from the [Releases Page](https://github.com/LaVashikk/MultiPortals-Crosshair-Addon/releases).
