@@ -119,7 +119,7 @@ ScheduleEvent.Add("global", function() {
     // Read the cache, if the player previously changed the size - use it
     local screen_size_info = File("user_screen_size.log")
     screen_size_info.updateInfo()
-    for(local itry; itry <= 15; itry++) {
+    for(local itry = 0; itry <= 15; itry++) {
         yield 0.5
         local lines = screen_size_info.readlines()
         if(lines.len() == 2) {
