@@ -20,6 +20,16 @@ https://github.com/user-attachments/assets/867f7e4a-3ff7-42e2-8ab1-e7958141dcd7
   Video demonstration
 </div>
 
+### See it in action!
+These amazing community maps are already using MultiPortals with the new crosshair addon:
+* **Nullpoint Crisis** by CropFactor: https://steamcommunity.com/sharedfiles/filedetails/?id=3119957038
+
+![2025-10-31_12-28](https://github.com/user-attachments/assets/ff860373-5ef8-4901-8375-b98eeb2bc405)
+* **Reset** by Phosphorus: https://steamcommunity.com/sharedfiles/filedetails/?id=3587581105
+
+![reset0017](https://github.com/user-attachments/assets/1729b8cf-1887-4eb0-9e10-e24448a052e9)
+
+
 ## Installation
 
 1.  **Download the latest release** from the [Releases Page](https://github.com/LaVashikk/MultiPortals-Crosshair-Addon/releases).
