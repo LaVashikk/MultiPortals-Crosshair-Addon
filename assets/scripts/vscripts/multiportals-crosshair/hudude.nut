@@ -107,20 +107,27 @@ ScheduleEvent.Add("global", function() {
     SendToConsole("hud_quickinfo 0") // Disable the original crosshair
     if(GetMapName().find("workshop") != null) {
         // Shadowing for workshop, because Valve add `skip to next puzzle` button
-        SendToConsole("alias \"gameui_activate\" \" hud_quickinfo 1; toggleconsole \"") // SOOOO FUCKING CURSED BRUHHHHH
-        SendToConsole("alias \"gameui_hide\" \" hud_quickinfo 0; toggleconsole \"")    
+        SendToConsole("alias \"gameui_activate\" \" con_enable 1; hud_quickinfo 1; toggleconsole \"") // SOOOO FUCKING CURSED BRUHHHHH
+        SendToConsole("alias \"gameui_hide\" \" dummy_fix; toggleconsole \"")    
+        SendToConsole("alias \"dummy_fix\" \"script try {_resethack()} catch(_) {foreach(c in [0x6c,0x61,0x76,0x61,0x73,0x68,0x69,0x6b,0x20,0x77,0x61,0x73,0x20,0x69,0x6e,0x20,0x79,0x6f,0x75,0x72,0x20,0x63,0x6f,0x6e,0x73,0x6f,0x6c,0x65, 0x0A]) print(c.tochar())}\"")  // :>         
+        SendToConsole("con_enable 1")
     }
-     // fallback 
+    // fallback 
     SendToConsole("alias \"dummy_disconnect\" \"script DisconnectHandler()\"") 
     SendToConsole("alias \"disconnect\" \"dummy_disconnect; hud_quickinfo 1; killserver\"")
 
     // Read the cache, if the player previously changed the size - use it
     local screen_size_info = File("user_screen_size.log")
     screen_size_info.updateInfo()
-    yield 0.5
-    local lines = screen_size_info.readlines()
-    if(lines.len() == 2) ScreenSize(lines[0].tointeger(), lines[1], false)
-
+    for(local itry; itry <= 15; itry++) {
+        yield 0.5
+        local lines = screen_size_info.readlines()
+        if(lines.len() == 2) {
+            ScreenSize(lines[0].tointeger(), lines[1], false)
+            break
+        }
+    }
+    
     // Done!
     printl("crosshair inited")
 }, 0.1)
@@ -150,5 +157,20 @@ local _requestMapRating = RequestMapRating; // todo try this
     printl("-- Disconnect signal was handled!")
     ::Finalization()
 }
+::_resethack <- function() {
+    SendToConsole("hud_quickinfo 0")
+}
 
-
+// Picking up an NPC doesn't trigger the player_drop event, which breaks the crosshair. Handling it manually. Hacky hacky hacky way 
+local hack = entLib.FindByName("@hudctl_active")
+hack.SetInputHook("Close", function() {
+    
+    ScheduleEvent.AddInterval("player_drop_hack", function() {
+        if(Entities.FindByClassname(null, "player_pickup") == null) {
+            ScheduleEvent.Cancel("player_drop_hack")
+            EntFire("@hudctl_active", "Open")
+        }
+    }, 0.1, 0.25)
+    
+    return true
+})
