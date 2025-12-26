@@ -29,6 +29,8 @@ These amazing community maps are already using MultiPortals with the new crossha
 
 ![reset0017](https://github.com/user-attachments/assets/1729b8cf-1887-4eb0-9e10-e24448a052e9)
 
+* **Solicitude** by Timmy Boy
+https://steamcommunity.com/sharedfiles/filedetails/?id=3628965007
 
 ## Installation
 
