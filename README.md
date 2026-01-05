@@ -29,9 +29,9 @@ These amazing community maps are already using MultiPortals with the new crossha
 
 ![reset0017](https://github.com/user-attachments/assets/1729b8cf-1887-4eb0-9e10-e24448a052e9)
 
-* **Solicitude** by Timmy Boy
-https://steamcommunity.com/sharedfiles/filedetails/?id=3628965007
+* **Solicitude** by Timmy Boy: https://steamcommunity.com/sharedfiles/filedetails/?id=3628965007
 
+![solicitude](https://github.com/user-attachments/assets/59e3c335-d9ee-4b6e-87d2-342c6329bba4)
 ## Installation
 
 1.  **Download the latest release** from the [Releases Page](https://github.com/LaVashikk/MultiPortals-Crosshair-Addon/releases).
