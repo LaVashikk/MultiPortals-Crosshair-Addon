@@ -56,6 +56,16 @@ function setHudResolution(x, y) : (calculatedTranslate) {
 
 // Initialize
 ScheduleEvent.Add("global", function() {
+    if(!("CustomPortal" in getroottable())) {
+        printl("\n======================== WARNING ========================")
+        printl("MultiPortals is not initialized!")
+        printl("You need to use the 'multiportals.vmf' instance in your map.")
+        printl("You can download it here: https://github.com/lavashikk/MultiPortals/releases")
+        printl("==========================================================\n")
+        
+        ScriptShowHudMessageAll("MultiPortals Crosshair Error! See console for details.", 10)
+        return
+    }
     if(!("MP_Events" in getroottable())) {
         printl("\n======================== WARNING ========================")
         printl("MP_Events not found!")
@@ -66,6 +76,7 @@ ScheduleEvent.Add("global", function() {
         printl("==========================================================\n")
         
         ScriptShowHudMessageAll("MultiPortals Error! See console for details.", 10)
+        return
     }
 
     Entities.FindByName(null, "@hudude_point_fill_ctrl").SetAbsOrigin(Vector())
@@ -173,4 +184,5 @@ hack.SetInputHook("Close", function() {
     }, 0.1, 0.25)
     
     return true
+
 })
