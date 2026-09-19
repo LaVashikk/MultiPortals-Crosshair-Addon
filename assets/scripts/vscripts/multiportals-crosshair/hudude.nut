@@ -11,6 +11,7 @@ local calculatedTranslate = {   // magic shit
     fill_R = Vector(-0.076, -0.16, 0)
 }
 
+::CURRENT_CROSSHAIR_PAIR <- 0
 const LEPR_TIME = 0.5  // Time to update cursor color when pairId changes
 ::PORTAL1_DEFAULT_COLOR <- Vector(0,101,255) // const can be only integer,float or string
 ::PORTAL2_DEFAULT_COLOR <- Vector(255, 128, 0)
@@ -69,8 +70,7 @@ ScheduleEvent.Add("global", function() {
     if(!("MP_Events" in getroottable())) {
         printl("\n======================== WARNING ========================")
         printl("MP_Events not found!")
-        printl("This means you are either using an outdated version of MultiPortals,")
-        printl("or the MultiPortals instance is missing from the map.")
+        printl("This means you are using an outdated version of MultiPortals")
         printl("\nPlease update to the latest version, add the MultiPortals")
         printl("instance to your map, or contact @lavashik for assistance.")
         printl("==========================================================\n")
@@ -98,20 +98,25 @@ ScheduleEvent.Add("global", function() {
         local pair = customPortals[pairId]
         if(pair == null) return
         
+        CURRENT_CROSSHAIR_PAIR = pairId
         LerpCrosshairColor(pair[0].color, true)
         LerpCrosshairColor(pair[1].color, false)
         EntFire("@hudude_ctrl_reset", "Trigger")
     });
 
-    MP_Events.OnPlaced.AddAction(function(customPortal) {
+    MP_Events.OnOpened.AddAction(function(customPortal) {
         if(activator.GetClassname() != "weapon_portalgun") return
         local idx = customPortal.isPrimaryPortal ? 1 : 2
         EntFire("@hudude_ctrl_portal" + idx, "Trigger")
     });
 
-    MP_Events.OnFizzled.AddAction(function(customPortal) {
+    MP_Events.OnClosed.AddAction(function(customPortal) {
         if(activator.GetClassname() != "prop_portal") return
-        EntFire("@hudude_ctrl_reset", "Trigger")
+        if(customPortal.pairId != CURRENT_CROSSHAIR_PAIR) return
+        local type = customPortal.isPrimaryPortal ? "left" : "right" // todo
+        EntFire("@hudctl_" + type + "_fill", "Close")
+        EntFire("@hudctl_" + type + "-ring", "Close")
+        EntFire("@hudctl_active", "Open")
     });
     // --------------------------------------------------------------
 
